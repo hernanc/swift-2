@@ -13,7 +13,6 @@ class SentMemeTableViewController : UIViewController, UITableViewDataSource, UIT
     
     var memes: [Meme]!
     
-    
     @IBOutlet weak var tableView: UITableView!
     
     func viewWillAppear() {

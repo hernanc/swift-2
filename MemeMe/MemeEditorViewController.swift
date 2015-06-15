@@ -209,10 +209,10 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
             if completed {
                 println("Sharing completed, saving")
                 self.save()
+                self.dismissViewControllerAnimated(true, completion: nil)
             } else {
                 println("Sharing cancelled")
             }
-            self.dismissViewControllerAnimated(true, completion: nil)
         }
         
         self.presentViewController(activityController, animated: true, completion: nil)
