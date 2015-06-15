@@ -107,16 +107,26 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     }
     
     func generateMemedImage() -> UIImage {
+        
         self.toolBar.hidden = true
         
         // TODO: RENDER PROPER IMAGE
         
         // Render view to an image
-        let size = self.view.frame.size
+        let size = self.memeImageView.frame.size
         UIGraphicsBeginImageContext(size)
-        self.view.drawViewHierarchyInRect(self.view.bounds, afterScreenUpdates: true)
+        
+        self.memeImageView.drawViewHierarchyInRect(self.memeImageView.bounds, afterScreenUpdates: true)
+        //self.topText.drawViewHierarchyInRect(self.topText.bounds, afterScreenUpdates: true)
+        //self.bottomText.drawViewHierarchyInRect(self.bottomText.bounds, afterScreenUpdates: true)
+        
         let memedImage : UIImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
+        
+//        UIGraphicsBeginImageContext(self.memeImageView.frame.size)
+//        self.view.drawViewHierarchyInRect(self.memeImageView.bounds, afterScreenUpdates: true)
+//        let memedImage : UIImage = UIGraphicsGetImageFromCurrentImageContext()
+//        UIGraphicsEndImageContext()
         
 // ORIGINAL
 //        let size = self.view.frame.size
