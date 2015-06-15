@@ -11,8 +11,6 @@ import UIKit
 
 class SentMemeCollectionViewController : UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
 
-    //@IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
-    
     var memes: [Meme]!
     
     @IBOutlet weak var collectionView: UICollectionView!
@@ -64,17 +62,14 @@ class SentMemeCollectionViewController : UIViewController, UICollectionViewDataS
         return self.memes.count
     }
     
-    
-    
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("MemeCollectionCell", forIndexPath: indexPath) as! MemeCollectionViewCell
         let meme = self.memes[indexPath.row]
         
-        // Set the name and image
         cell.memeTopLabel.text = meme.topText
         cell.memeBottomLabel.text = meme.bottomText
-        cell.memeImageView?.image = meme.memedImage
+        cell.memeImageView?.image = meme.image
         
         return cell
         

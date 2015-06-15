@@ -17,9 +17,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Bhr-WB-zDr">
-                                <rect key="frame" x="0.0" y="64" width="600" height="492"/>
-                            </imageView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lay-NH-BQM">
                                 <rect key="frame" x="0.0" y="556" width="600" height="44"/>
                                 <constraints>
@@ -41,33 +38,6 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="lsC-rn-vFZ"/>
                                 </items>
                             </toolbar>
-                            <textField clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" allowsEditingTextAttributes="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gUa-AH-Slz">
-                                <rect key="frame" x="0.0" y="93" width="600" height="30"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <attributedString key="attributedText">
-                                    <fragment content="TOP">
-                                        <attributes>
-                                            <color key="NSColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                            <font key="NSFont" size="14" name="HelveticaNeue"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                        </attributes>
-                                    </fragment>
-                                </attributedString>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" allowsEditingTextAttributes="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="z1G-2u-XvP">
-                                <rect key="frame" x="0.0" y="474" width="600" height="30"/>
-                                <attributedString key="attributedText">
-                                    <fragment content="BOTTOM">
-                                        <attributes>
-                                            <color key="NSColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                            <font key="NSFont" size="12" name="Helvetica"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="clipping" baseWritingDirection="natural"/>
-                                        </attributes>
-                                    </fragment>
-                                </attributedString>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
-                            </textField>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JMb-9V-vMy">
                                 <rect key="frame" x="0.0" y="20" width="600" height="44"/>
                                 <constraints>
@@ -87,40 +57,76 @@
                                     </barButtonItem>
                                 </items>
                             </toolbar>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2lp-5h-nzF">
+                                <rect key="frame" x="0.0" y="64" width="600" height="492"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FhN-9a-88U">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="492"/>
+                                    </imageView>
+                                    <textField clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" allowsEditingTextAttributes="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hlZ-tu-FN5">
+                                        <rect key="frame" x="0.0" y="29" width="600" height="30"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <attributedString key="attributedText">
+                                            <fragment content="TOP">
+                                                <attributes>
+                                                    <color key="NSColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <font key="NSFont" size="14" name="HelveticaNeue"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" allowsEditingTextAttributes="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tut-ok-tIW">
+                                        <rect key="frame" x="0.0" y="410" width="600" height="30"/>
+                                        <attributedString key="attributedText">
+                                            <fragment content="BOTTOM">
+                                                <attributes>
+                                                    <color key="NSColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                    <font key="NSFont" size="12" name="Helvetica"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="clipping" baseWritingDirection="natural"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
+                                    </textField>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="tut-ok-tIW" firstAttribute="leading" secondItem="2lp-5h-nzF" secondAttribute="leading" id="4Tz-IM-Gkm"/>
+                                    <constraint firstAttribute="trailing" secondItem="FhN-9a-88U" secondAttribute="trailing" id="6t5-VT-heq"/>
+                                    <constraint firstItem="hlZ-tu-FN5" firstAttribute="top" secondItem="2lp-5h-nzF" secondAttribute="top" constant="29" id="BpU-we-dhG"/>
+                                    <constraint firstAttribute="trailing" secondItem="tut-ok-tIW" secondAttribute="trailing" id="HWH-P6-oua"/>
+                                    <constraint firstAttribute="bottom" secondItem="tut-ok-tIW" secondAttribute="bottom" constant="52" id="Qmf-Zg-PBh"/>
+                                    <constraint firstItem="hlZ-tu-FN5" firstAttribute="leading" secondItem="2lp-5h-nzF" secondAttribute="leading" id="Rzc-lP-gkd"/>
+                                    <constraint firstItem="FhN-9a-88U" firstAttribute="top" secondItem="2lp-5h-nzF" secondAttribute="top" id="bfL-v4-NSI"/>
+                                    <constraint firstItem="FhN-9a-88U" firstAttribute="leading" secondItem="2lp-5h-nzF" secondAttribute="leading" id="hrK-zf-JpZ"/>
+                                    <constraint firstAttribute="trailing" secondItem="hlZ-tu-FN5" secondAttribute="trailing" id="pbL-Fq-NID"/>
+                                    <constraint firstAttribute="bottom" secondItem="FhN-9a-88U" secondAttribute="bottom" id="snA-Sr-FKV"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.65479008838383845" green="0.65479008838383845" blue="0.65479008838383845" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="2lp-5h-nzF" secondAttribute="trailing" constant="-16" id="0v1-lY-g29"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Lay-NH-BQM" secondAttribute="trailing" constant="-16" id="1Mq-Ov-EBV"/>
                             <constraint firstItem="JMb-9V-vMy" firstAttribute="top" secondItem="1zb-Qr-3o5" secondAttribute="bottom" id="4fU-Zm-VkD"/>
                             <constraint firstItem="JMb-9V-vMy" firstAttribute="leading" secondItem="ALh-yZ-yT3" secondAttribute="leadingMargin" constant="-16" id="5J5-BK-gdo"/>
-                            <constraint firstItem="Lay-NH-BQM" firstAttribute="top" secondItem="z1G-2u-XvP" secondAttribute="bottom" constant="40" id="9nP-pJ-tMf"/>
-                            <constraint firstItem="Bhr-WB-zDr" firstAttribute="top" secondItem="JMb-9V-vMy" secondAttribute="bottom" id="9wX-9S-fGy"/>
                             <constraint firstItem="Lay-NH-BQM" firstAttribute="leading" secondItem="ALh-yZ-yT3" secondAttribute="leadingMargin" constant="-16" id="B17-cF-S4X"/>
-                            <constraint firstItem="z1G-2u-XvP" firstAttribute="leading" secondItem="ALh-yZ-yT3" secondAttribute="leadingMargin" constant="-16" id="Bo4-R3-2un"/>
-                            <constraint firstItem="Bhr-WB-zDr" firstAttribute="top" secondItem="JMb-9V-vMy" secondAttribute="bottom" id="DuB-ge-r37"/>
+                            <constraint firstItem="2lp-5h-nzF" firstAttribute="top" secondItem="JMb-9V-vMy" secondAttribute="bottom" id="Gge-UF-dPH"/>
                             <constraint firstItem="aAM-oN-x0Y" firstAttribute="top" secondItem="Lay-NH-BQM" secondAttribute="bottom" id="JDK-dD-UdK"/>
-                            <constraint firstItem="gUa-AH-Slz" firstAttribute="leading" secondItem="ALh-yZ-yT3" secondAttribute="leadingMargin" constant="-16" id="Ldq-Sg-F3E"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="gUa-AH-Slz" secondAttribute="trailing" constant="-16" id="NEE-zw-HLV"/>
                             <constraint firstItem="JMb-9V-vMy" firstAttribute="top" secondItem="ALh-yZ-yT3" secondAttribute="topMargin" id="NpM-yf-8vu"/>
                             <constraint firstItem="JMb-9V-vMy" firstAttribute="leading" secondItem="ALh-yZ-yT3" secondAttribute="leadingMargin" constant="-16" id="Puf-id-bHS"/>
-                            <constraint firstItem="Bhr-WB-zDr" firstAttribute="leading" secondItem="ALh-yZ-yT3" secondAttribute="leadingMargin" constant="-16" id="Rfe-uL-GA0"/>
-                            <constraint firstItem="gUa-AH-Slz" firstAttribute="top" secondItem="1zb-Qr-3o5" secondAttribute="bottom" constant="29" id="Vhh-Pi-eAi"/>
-                            <constraint firstItem="Lay-NH-BQM" firstAttribute="top" secondItem="Bhr-WB-zDr" secondAttribute="bottom" id="X4W-AT-ani"/>
                             <constraint firstAttribute="trailingMargin" secondItem="JMb-9V-vMy" secondAttribute="trailing" constant="-16" id="ZyY-MM-6ki"/>
-                            <constraint firstItem="Bhr-WB-zDr" firstAttribute="top" secondItem="1zb-Qr-3o5" secondAttribute="bottom" id="fjw-8j-S6a"/>
+                            <constraint firstItem="2lp-5h-nzF" firstAttribute="leading" secondItem="ALh-yZ-yT3" secondAttribute="leadingMargin" constant="-16" id="csd-aK-sT4"/>
                             <constraint firstAttribute="trailingMargin" secondItem="JMb-9V-vMy" secondAttribute="trailing" constant="-16" id="fsW-hP-LR5"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="z1G-2u-XvP" secondAttribute="trailing" constant="-16" id="nJD-PI-FHm"/>
-                            <constraint firstItem="gUa-AH-Slz" firstAttribute="top" secondItem="JMb-9V-vMy" secondAttribute="bottom" constant="29" id="sZi-UF-Fo3"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Bhr-WB-zDr" secondAttribute="trailing" constant="-16" id="ydY-Tl-0iv"/>
+                            <constraint firstItem="Lay-NH-BQM" firstAttribute="top" secondItem="2lp-5h-nzF" secondAttribute="bottom" id="g9w-7d-JGG"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="NpM-yf-8vu"/>
                                 <exclude reference="Puf-id-bHS"/>
                                 <exclude reference="fsW-hP-LR5"/>
-                                <exclude reference="DuB-ge-r37"/>
-                                <exclude reference="fjw-8j-S6a"/>
-                                <exclude reference="Vhh-Pi-eAi"/>
                             </mask>
                         </variation>
                     </view>
@@ -137,12 +143,13 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="bottomText" destination="z1G-2u-XvP" id="fm6-hv-NZq"/>
-                        <outlet property="memeImageView" destination="Bhr-WB-zDr" id="iMa-4a-z0I"/>
+                        <outlet property="bottomText" destination="tut-ok-tIW" id="9Fz-Hq-YLj"/>
+                        <outlet property="memeContainer" destination="2lp-5h-nzF" id="4jp-xe-QSz"/>
+                        <outlet property="memeImageView" destination="FhN-9a-88U" id="G0C-tP-DZn"/>
                         <outlet property="pickFromCameraButtonItem" destination="NDV-xc-UKt" id="Wpn-Dr-Eb8"/>
                         <outlet property="shareButton" destination="p4T-wu-kdd" id="6fS-EG-rxc"/>
                         <outlet property="toolBar" destination="Lay-NH-BQM" id="gcc-iy-Md5"/>
-                        <outlet property="topText" destination="gUa-AH-Slz" id="4Kf-Cc-3lb"/>
+                        <outlet property="topText" destination="hlZ-tu-FN5" id="hGi-ZC-mcL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dki-IY-FYf" sceneMemberID="firstResponder"/>
