@@ -110,6 +110,7 @@
                             <constraint firstItem="Bhr-WB-zDr" firstAttribute="top" secondItem="1zb-Qr-3o5" secondAttribute="bottom" id="fjw-8j-S6a"/>
                             <constraint firstAttribute="trailingMargin" secondItem="JMb-9V-vMy" secondAttribute="trailing" constant="-16" id="fsW-hP-LR5"/>
                             <constraint firstAttribute="trailingMargin" secondItem="z1G-2u-XvP" secondAttribute="trailing" constant="-16" id="nJD-PI-FHm"/>
+                            <constraint firstItem="gUa-AH-Slz" firstAttribute="top" secondItem="JMb-9V-vMy" secondAttribute="bottom" constant="29" id="sZi-UF-Fo3"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Bhr-WB-zDr" secondAttribute="trailing" constant="-16" id="ydY-Tl-0iv"/>
                         </constraints>
                         <variation key="default">
@@ -119,6 +120,7 @@
                                 <exclude reference="fsW-hP-LR5"/>
                                 <exclude reference="DuB-ge-r37"/>
                                 <exclude reference="fjw-8j-S6a"/>
+                                <exclude reference="Vhh-Pi-eAi"/>
                             </mask>
                         </variation>
                     </view>

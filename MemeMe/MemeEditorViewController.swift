@@ -19,7 +19,6 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     @IBOutlet weak var memeImageView: UIImageView!
     @IBOutlet weak var topText: UITextField!
     @IBOutlet weak var bottomText: UITextField!
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,10 +33,6 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         self.unsubscribeFromKeyboardNotifications()
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
     }
     
     func setDefaultTextAttributes() {
@@ -65,7 +60,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     // UITextFieldDelegate Text methods
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
-        if textField.tag == 1 {
+        if textField == self.topText {
             println("textFieldShouldBeginEditing TOP")
         }else{
             println("textFieldShouldBeginEditing BOTTOM")
@@ -85,13 +80,13 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     }
     func textFieldDidEndEditing(textField: UITextField) {
         if textField.text == "" {
-            if textField.tag == 1 {
+            if textField == self.topText {
                 textField.text = "TOP"
             }else{
                 textField.text = "BOTTOM"
             }
         }
-        if textField.tag == 2 {
+        if textField == self.bottomText {
             self.unsubscribeFromKeyboardNotifications()
         }
         textField.text = textField.text.uppercaseString
@@ -119,10 +114,17 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         // Render view to an image
         let size = self.view.frame.size
         UIGraphicsBeginImageContext(size)
-        self.view.drawViewHierarchyInRect(self.view.frame, afterScreenUpdates: true)
+        self.view.drawViewHierarchyInRect(self.view.bounds, afterScreenUpdates: true)
         let memedImage : UIImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
+// ORIGINAL
+//        let size = self.view.frame.size
+//        UIGraphicsBeginImageContext(size)
+//        self.view.drawViewHierarchyInRect(self.view.frame, afterScreenUpdates: true)
+//        let memedImage : UIImage = UIGraphicsGetImageFromCurrentImageContext()
+//        UIGraphicsEndImageContext()
+//        
 //        let size2 = self.memeImageView.frame.size
 //        UIGraphicsBeginImageContext(size2)
 //        self.view.drawViewHierarchyInRect(self.memeImageView.frame, afterScreenUpdates: true)
