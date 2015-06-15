@@ -12,6 +12,7 @@ import UIKit
 class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     
     
+    @IBOutlet weak var memeContainer: UIView!
     @IBOutlet weak var pickFromCameraButtonItem: UIBarButtonItem!
     @IBOutlet weak var shareButton: UIBarButtonItem!
     @IBOutlet weak var toolBar: UIToolbar!
@@ -19,7 +20,6 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     @IBOutlet weak var memeImageView: UIImageView!
     @IBOutlet weak var topText: UITextField!
     @IBOutlet weak var bottomText: UITextField!
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,16 +36,23 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         self.unsubscribeFromKeyboardNotifications()
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-    
     func setDefaultTextAttributes() {
+        // Original memeTextAttributes
+//        let memeTextAttributes = [
+//            NSForegroundColorAttributeName : UIColor.whiteColor(),
+//            NSFontAttributeName : UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
+//            NSStrokeWidthAttributeName : NSNumber(float: 5.0)
+//            NSStrokeColorAttributeName : UIColor.blackColor(),
+//        ]
+        // Alternative to make the fonts be white and not transparent, it's not perfect but the other it worse
+        var shadow = NSShadow()
+        shadow.shadowBlurRadius = 2
+        shadow.shadowColor = UIColor.blackColor()
+        
         let memeTextAttributes = [
-            NSStrokeColorAttributeName : UIColor.blackColor(),
             NSForegroundColorAttributeName : UIColor.whiteColor(),
             NSFontAttributeName : UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
-            NSStrokeWidthAttributeName : NSNumber(float: 5.0)
+            NSShadowAttributeName : shadow
         ]
         
         self.topText.tag = 1;
@@ -65,7 +72,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     // UITextFieldDelegate Text methods
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
-        if textField.tag == 1 {
+        if textField == self.topText {
             println("textFieldShouldBeginEditing TOP")
         }else{
             println("textFieldShouldBeginEditing BOTTOM")
@@ -85,13 +92,13 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     }
     func textFieldDidEndEditing(textField: UITextField) {
         if textField.text == "" {
-            if textField.tag == 1 {
+            if textField == self.topText {
                 textField.text = "TOP"
             }else{
                 textField.text = "BOTTOM"
             }
         }
-        if textField.tag == 2 {
+        if textField == self.bottomText {
             self.unsubscribeFromKeyboardNotifications()
         }
         textField.text = textField.text.uppercaseString
@@ -112,22 +119,17 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     }
     
     func generateMemedImage() -> UIImage {
+        
         self.toolBar.hidden = true
         
-        // TODO: RENDER PROPER IMAGE
-        
         // Render view to an image
-        let size = self.view.frame.size
+        let size = self.memeContainer.frame.size
         UIGraphicsBeginImageContext(size)
-        self.view.drawViewHierarchyInRect(self.view.frame, afterScreenUpdates: true)
+        
+        self.memeContainer.drawViewHierarchyInRect(self.memeContainer.bounds, afterScreenUpdates: true)
         let memedImage : UIImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
-//        let size2 = self.memeImageView.frame.size
-//        UIGraphicsBeginImageContext(size2)
-//        self.view.drawViewHierarchyInRect(self.memeImageView.frame, afterScreenUpdates: true)
-//        let memedImage2 : UIImage = UIGraphicsGetImageFromCurrentImageContext()
-//        UIGraphicsEndImageContext()
         self.toolBar.hidden = false
         
         return memedImage
@@ -135,26 +137,24 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     func save() {
         
-        if let new_image = self.memeImageView.image {
-            let image = new_image
+        if let image = self.memeImageView.image {
+            
+            let generatedImage = self.generateMemedImage()
+            
+            let meme = Meme(topText: self.topText.text, bottomText: self.bottomText.text, image: image, memedImage: generatedImage)
+            
+            println("saved")
+            
+            (UIApplication.sharedApplication().delegate as! AppDelegate).memes.append(meme)
+            
+            println("MEMES SAVED: ")
+            println((UIApplication.sharedApplication().delegate as! AppDelegate).memes.count)
+            
         }else{
             println("Image does not exist, returning")
-            let image = UIImage()
             return
         }
-
-        let image = self.memeImageView.image!
         
-        let generatedImage = self.generateMemedImage()
-        
-        var meme = Meme(topText: self.topText.text, bottomText: self.bottomText.text, image: image, memedImage: generatedImage)
-        
-        println("saved")
-        
-        (UIApplication.sharedApplication().delegate as! AppDelegate).memes.append(meme)
-        
-        println("MEMES SAVED: ")
-        println((UIApplication.sharedApplication().delegate as! AppDelegate).memes.count)
     }
     
     // Keyboard Observer
@@ -223,26 +223,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     @IBAction func cancelButton(sender: AnyObject) {
         println("Cancel pressed")
         
-        //var controller = self.storyboard?.instantiateViewControllerWithIdentifier("SentMemeTableViewController") as! UIViewController
-        //controller.reloadTableData()
-        
         self.dismissViewControllerAnimated(true, completion: nil)
     }
-    
-//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-//        let controller = segue.destinationViewController as! UINavigationController
-//        
-//        println("Calling \(segue.identifier)")
-//        
-//        if segue.identifier == "TabNavigationController" {
-//            println("calling TabNavigationController")
-////            let resultTuple = self.selectOption(.Paper)
-////            controller.resultValue = resultTuple.result
-////            controller.resultImgValue = resultTuple.img
-//        }
-//        
-//        
-//    }
     
 }
 
