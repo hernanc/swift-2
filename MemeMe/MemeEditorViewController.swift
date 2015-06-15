@@ -12,15 +12,14 @@ import UIKit
 class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     
     
-    @IBOutlet weak var imagePickerView: UIImageView!
-    
     @IBOutlet weak var pickFromCameraButtonItem: UIBarButtonItem!
     @IBOutlet weak var shareButton: UIBarButtonItem!
+    @IBOutlet weak var toolBar: UIToolbar!
     
+    @IBOutlet weak var memeImageView: UIImageView!
     @IBOutlet weak var topText: UITextField!
     @IBOutlet weak var bottomText: UITextField!
-    
-    @IBOutlet weak var toolBar: UIToolbar!
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,7 +49,6 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.pickFromCameraButtonItem.enabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
-        //self.subscribeToKeyboardNotifications()
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -101,7 +99,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         if let image = info["UIImagePickerControllerOriginalImage"] as? UIImage {
             self.topText.hidden = false
             self.bottomText.hidden = false
-            self.imagePickerView.image = image
+            self.memeImageView.image = image
         }
         self.dismissViewControllerAnimated(true, completion: nil)
     }
@@ -111,6 +109,9 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     }
     
     func generateMemedImage() -> UIImage {
+        self.toolBar.hidden = true
+        
+        // TODO: RENDER PROPER IMAGE
         
         // Render view to an image
         let size = self.view.frame.size
@@ -119,25 +120,28 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         let memedImage : UIImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
-//        let size2 = self.imagePickerView.frame.size
+//        let size2 = self.memeImageView.frame.size
 //        UIGraphicsBeginImageContext(size2)
-//        self.view.drawViewHierarchyInRect(self.imagePickerView.frame, afterScreenUpdates: true)
+//        self.view.drawViewHierarchyInRect(self.memeImageView.frame, afterScreenUpdates: true)
 //        let memedImage2 : UIImage = UIGraphicsGetImageFromCurrentImageContext()
 //        UIGraphicsEndImageContext()
+        self.toolBar.hidden = false
         
         return memedImage
     }
     
     func save() {
-        let image = self.imagePickerView.image!
+        let image = self.memeImageView.image!
         let generatedImage = self.generateMemedImage()
         
         var meme = Meme(topText: self.topText.text, bottomText: self.bottomText.text, image: image, memedImage: generatedImage)
         
-        (UIApplication.sharedApplication().delegate as! AppDelegate).memes.append(meme)
-        
         println("saved")
         
+        (UIApplication.sharedApplication().delegate as! AppDelegate).memes.append(meme)
+        
+        println("MEMES SAVED: ")
+        println((UIApplication.sharedApplication().delegate as! AppDelegate).memes.count)
     }
     
     // Keyboard Observer
@@ -184,15 +188,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         
         self.shareButton.enabled = false
         
-        //self.navigationController?.setNavigationBarHidden(true, animated: true)
-        //self.navigationController?.setToolbarHidden(true, animated: true)
-        self.toolBar.hidden = true
-        
         var image = generateMemedImage()
-        self.toolBar.hidden = false
-        
-        //self.navigationController?.setNavigationBarHidden(false, animated: true)
-        //self.navigationController?.setToolbarHidden(false, animated: true)
         
         let activityController = UIActivityViewController(activityItems: [image], applicationActivities: nil)
         
@@ -203,7 +199,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
             } else {
                 println("Sharing cancelled")
             }
-            //self.dismissViewControllerAnimated(true, completion: nil)
+            self.dismissViewControllerAnimated(true, completion: nil)
         }
         
         self.presentViewController(activityController, animated: true, completion: nil)
@@ -211,6 +207,31 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         self.shareButton.enabled = true
     }
     
+    @IBAction func cancelButton(sender: AnyObject) {
+        println("Cancel pressed")
+        self.dismissViewControllerAnimated(true, completion: nil)
+        //var controller = self.storyboard?.instantiateViewControllerWithIdentifier("TabNavigationController") as! UINavigationController
+        
+        //let resultTuple = self.selectOption(.Rock)
+        //controller.resultValue = resultTuple.result
+        //controller.resultImgValue = resultTuple.img
+        
+        //presentViewController(controller, animated: true, completion: nil)
+    }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let controller = segue.destinationViewController as! UINavigationController
+        
+        println("Calling \(segue.identifier)")
+        
+        if segue.identifier == "TabNavigationController" {
+            println("calling TabNavigationController")
+//            let resultTuple = self.selectOption(.Paper)
+//            controller.resultValue = resultTuple.result
+//            controller.resultImgValue = resultTuple.img
+        }
+        
+        
+    }
 }
 
