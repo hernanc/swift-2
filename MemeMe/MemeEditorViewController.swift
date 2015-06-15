@@ -20,6 +20,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     @IBOutlet weak var topText: UITextField!
     @IBOutlet weak var bottomText: UITextField!
     
+    @IBOutlet weak var toolBar: UIToolbar!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -182,14 +184,15 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         
         self.shareButton.enabled = false
         
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
-        self.navigationController?.setToolbarHidden(true, animated: true)
+        //self.navigationController?.setNavigationBarHidden(true, animated: true)
+        //self.navigationController?.setToolbarHidden(true, animated: true)
+        self.toolBar.hidden = true
         
         var image = generateMemedImage()
+        self.toolBar.hidden = false
         
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
-        self.navigationController?.setToolbarHidden(false, animated: true)
-        
+        //self.navigationController?.setNavigationBarHidden(false, animated: true)
+        //self.navigationController?.setToolbarHidden(false, animated: true)
         
         let activityController = UIActivityViewController(activityItems: [image], applicationActivities: nil)
         
@@ -200,7 +203,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
             } else {
                 println("Sharing cancelled")
             }
-            activityController.dismissViewControllerAnimated(true, completion: nil)
+            //self.dismissViewControllerAnimated(true, completion: nil)
         }
         
         self.presentViewController(activityController, animated: true, completion: nil)
