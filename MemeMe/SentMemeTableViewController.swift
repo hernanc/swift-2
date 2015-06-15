@@ -13,15 +13,43 @@ class SentMemeTableViewController : UIViewController, UITableViewDataSource, UIT
     
     var memes: [Meme]!
     
+    
+    @IBOutlet weak var tableView: UITableView!
+    
     func viewWillAppear() {
+        self.reloadTableData()
+    }
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        self.reloadTableData()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        if let memes_count = self.memes?.count {
+            if memes_count == 0 {
+                println("memes = 0, need meme")
+                self.getMeme()
+            }
+        } else {
+            println("self.memes not set")
+            self.getMeme()
+        }
+    }
+    
+    func getMeme(){
+        var controller = self.storyboard?.instantiateViewControllerWithIdentifier("makeMemeViewController") as! UIViewController
+        presentViewController(controller, animated: true, completion: nil)
+    }
+    
+    func reloadTableData(){
         let applicationDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
         self.memes = applicationDelegate.memes
-        
-        
-        
-        println("SentMemeTableViewController Loaded \(self.memes.count) memes")
+        println("Loaded \(self.memes.count) memes")
+        self.tableView.reloadData()
     }
-
+    
     //Delegates
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let memes_count = self.memes?.count {
@@ -29,7 +57,6 @@ class SentMemeTableViewController : UIViewController, UITableViewDataSource, UIT
         }else{
             return 0
         }
-        
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {

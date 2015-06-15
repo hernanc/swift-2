@@ -23,7 +23,24 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.setDefaultTextAttributes()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.pickFromCameraButtonItem.enabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.unsubscribeFromKeyboardNotifications()
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+    
+    func setDefaultTextAttributes() {
         let memeTextAttributes = [
             NSStrokeColorAttributeName : UIColor.blackColor(),
             NSForegroundColorAttributeName : UIColor.whiteColor(),
@@ -44,20 +61,6 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         self.bottomText.textAlignment = .Center
         self.bottomText.text = "BOTTOM"
         self.bottomText.delegate = self
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        self.pickFromCameraButtonItem.enabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
-    }
-    
-    override func viewWillDisappear(animated: Bool) {
-        super.viewWillDisappear(animated)
-        self.unsubscribeFromKeyboardNotifications()
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
     }
     
     // UITextFieldDelegate Text methods
@@ -131,7 +134,17 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     }
     
     func save() {
+        
+        if let new_image = self.memeImageView.image {
+            let image = new_image
+        }else{
+            println("Image does not exist, returning")
+            let image = UIImage()
+            return
+        }
+
         let image = self.memeImageView.image!
+        
         let generatedImage = self.generateMemedImage()
         
         var meme = Meme(topText: self.topText.text, bottomText: self.bottomText.text, image: image, memedImage: generatedImage)
@@ -209,29 +222,27 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     @IBAction func cancelButton(sender: AnyObject) {
         println("Cancel pressed")
+        
+        //var controller = self.storyboard?.instantiateViewControllerWithIdentifier("SentMemeTableViewController") as! UIViewController
+        //controller.reloadTableData()
+        
         self.dismissViewControllerAnimated(true, completion: nil)
-        //var controller = self.storyboard?.instantiateViewControllerWithIdentifier("TabNavigationController") as! UINavigationController
-        
-        //let resultTuple = self.selectOption(.Rock)
-        //controller.resultValue = resultTuple.result
-        //controller.resultImgValue = resultTuple.img
-        
-        //presentViewController(controller, animated: true, completion: nil)
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let controller = segue.destinationViewController as! UINavigationController
-        
-        println("Calling \(segue.identifier)")
-        
-        if segue.identifier == "TabNavigationController" {
-            println("calling TabNavigationController")
-//            let resultTuple = self.selectOption(.Paper)
-//            controller.resultValue = resultTuple.result
-//            controller.resultImgValue = resultTuple.img
-        }
-        
-        
-    }
+//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+//        let controller = segue.destinationViewController as! UINavigationController
+//        
+//        println("Calling \(segue.identifier)")
+//        
+//        if segue.identifier == "TabNavigationController" {
+//            println("calling TabNavigationController")
+////            let resultTuple = self.selectOption(.Paper)
+////            controller.resultValue = resultTuple.result
+////            controller.resultImgValue = resultTuple.img
+//        }
+//        
+//        
+//    }
+    
 }
 

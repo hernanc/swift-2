@@ -8,7 +8,7 @@
         <!--Meme Editor View Controller-->
         <scene sceneID="Xdj-Ae-daj">
             <objects>
-                <viewController id="3HN-vZ-9up" customClass="MemeEditorViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="makeMemeViewController" id="3HN-vZ-9up" customClass="MemeEditorViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="1zb-Qr-3o5"/>
                         <viewControllerLayoutGuide type="bottom" id="aAM-oN-x0Y"/>
@@ -142,7 +142,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dki-IY-FYf" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2372" y="1199"/>
+            <point key="canvasLocation" x="2390" y="1230"/>
         </scene>
         <!--Sent Memes-->
         <scene sceneID="UwE-mT-R0j">
@@ -276,10 +276,13 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="j9K-El-6EU" id="yre-u4-0ye"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U0e-S4-7LR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1650" y="1215"/>
+            <point key="canvasLocation" x="1650" y="1199"/>
         </scene>
         <!--Meme Detail View Controller-->
         <scene sceneID="5q2-TH-ESP">
@@ -319,6 +322,6 @@
         <image name="table" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="1B7-RY-T13"/>
+        <segue reference="ixO-eA-NSY"/>
     </inferredMetricsTieBreakers>
 </document>
