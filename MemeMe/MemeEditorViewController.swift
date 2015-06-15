@@ -15,6 +15,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     @IBOutlet weak var imagePickerView: UIImageView!
     
     @IBOutlet weak var pickFromCameraButtonItem: UIBarButtonItem!
+    @IBOutlet weak var shareButton: UIBarButtonItem!
     
     @IBOutlet weak var topText: UITextField!
     @IBOutlet weak var bottomText: UITextField!
@@ -108,19 +109,19 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     }
     
     func generateMemedImage() -> UIImage {
-        //self.navigationController?.setNavigationBarHidden(true, animated: false)
-        //self.navigationController?.setToolbarHidden(true, animated: false)
         
         // Render view to an image
-        UIGraphicsBeginImageContext(self.view.frame.size)
-        self.view.drawViewHierarchyInRect(self.view.frame,
-            afterScreenUpdates: true)
-        let memedImage : UIImage =
-        UIGraphicsGetImageFromCurrentImageContext()
+        let size = self.view.frame.size
+        UIGraphicsBeginImageContext(size)
+        self.view.drawViewHierarchyInRect(self.view.frame, afterScreenUpdates: true)
+        let memedImage : UIImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
-        //self.navigationController?.setNavigationBarHidden(false, animated: false)
-        //self.navigationController?.setToolbarHidden(false, animated: false)
+//        let size2 = self.imagePickerView.frame.size
+//        UIGraphicsBeginImageContext(size2)
+//        self.view.drawViewHierarchyInRect(self.imagePickerView.frame, afterScreenUpdates: true)
+//        let memedImage2 : UIImage = UIGraphicsGetImageFromCurrentImageContext()
+//        UIGraphicsEndImageContext()
         
         return memedImage
     }
@@ -130,7 +131,11 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         let generatedImage = self.generateMemedImage()
         
         var meme = Meme(topText: self.topText.text, bottomText: self.bottomText.text, image: image, memedImage: generatedImage)
+        
+        (UIApplication.sharedApplication().delegate as! AppDelegate).memes.append(meme)
+        
         println("saved")
+        
     }
     
     // Keyboard Observer
@@ -172,20 +177,36 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
         self.presentViewController(imagePicker, animated: true, completion: nil)
     }
-
-    @IBAction func saveMeme(sender: AnyObject) {
-        if let navController = self.navigationController {
-            println("nav controller not found")
-            //navController.setToolbarHidden(true, animated: false)
-        }else{
-            println("nav controller not found")
+    
+    @IBAction func shareMeme(sender: AnyObject) {
+        
+        self.shareButton.enabled = false
+        
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+        self.navigationController?.setToolbarHidden(true, animated: true)
+        
+        var image = generateMemedImage()
+        
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        self.navigationController?.setToolbarHidden(false, animated: true)
+        
+        
+        let activityController = UIActivityViewController(activityItems: [image], applicationActivities: nil)
+        
+        activityController.completionWithItemsHandler = { (activityType: String!, completed: Bool, items: [AnyObject]!, err:NSError!) in
+            if completed {
+                println("Sharing completed, saving")
+                self.save()
+            } else {
+                println("Sharing cancelled")
+            }
+            activityController.dismissViewControllerAnimated(true, completion: nil)
         }
         
-        //self.navigationController?.setToolbarHidden(true, animated: false)
+        self.presentViewController(activityController, animated: true, completion: nil)
         
-        //self.save()
+        self.shareButton.enabled = true
     }
-    
     
     
 }

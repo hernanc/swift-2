@@ -94,11 +94,18 @@
                             <constraint firstAttribute="trailingMargin" secondItem="Bhr-WB-zDr" secondAttribute="trailing" constant="-16" id="ydY-Tl-0iv"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="HkD-Us-U1N"/>
+                    <navigationItem key="navigationItem" id="HkD-Us-U1N">
+                        <barButtonItem key="leftBarButtonItem" title="Item" systemItem="action" id="p4T-wu-kdd">
+                            <connections>
+                                <action selector="shareMeme:" destination="3HN-vZ-9up" id="RWo-QG-bKj"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="bottomText" destination="z1G-2u-XvP" id="fm6-hv-NZq"/>
                         <outlet property="imagePickerView" destination="Bhr-WB-zDr" id="4Om-vu-hxl"/>
                         <outlet property="pickFromCameraButtonItem" destination="NDV-xc-UKt" id="Wpn-Dr-Eb8"/>
+                        <outlet property="shareButton" destination="p4T-wu-kdd" id="6fS-EG-rxc"/>
                         <outlet property="topText" destination="gUa-AH-Slz" id="4Kf-Cc-3lb"/>
                     </connections>
                 </viewController>
