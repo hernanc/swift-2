@@ -103,7 +103,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
             
             topText.hidden = false
             bottomText.hidden = false
-            memeImageView.contentMode = UIViewContentMode.ScaleAspectFill
+            
+            memeImageView.contentMode = UIViewContentMode.ScaleAspectFit
             memeImageView.image = image
             
         }
