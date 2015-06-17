@@ -44,7 +44,7 @@ class SentMemeCollectionViewController : UIViewController, UICollectionViewDataS
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if let meme_count = memes?.count {
             return meme_count
-        }else{
+        } else {
             reloadTableData()
             
         }

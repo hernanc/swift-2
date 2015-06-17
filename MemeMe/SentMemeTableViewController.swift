@@ -52,7 +52,7 @@ class SentMemeTableViewController : UIViewController, UITableViewDataSource, UIT
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let memes_count = memes?.count {
             return memes_count
-        }else{
+        } else {
             return 0
         }
     }

@@ -66,7 +66,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
         if textField == topText {
             println("textFieldShouldBeginEditing TOP")
-        }else{
+        } else {
             println("textFieldShouldBeginEditing BOTTOM")
             subscribeToKeyboardNotifications()
         }
@@ -86,7 +86,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         if textField.text == "" {
             if textField == topText {
                 textField.text = "TOP"
-            }else{
+            } else {
                 textField.text = "BOTTOM"
             }
         }
@@ -142,7 +142,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
             println("MEMES SAVED: ")
             println((UIApplication.sharedApplication().delegate as! AppDelegate).memes.count)
             
-        }else{
+        } else {
             println("Image does not exist, returning")
             return
         }
