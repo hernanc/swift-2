@@ -26,17 +26,6 @@ class SentMemeCollectionViewController : UIViewController, UICollectionViewDataS
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        if let memes_count = memes?.count {
-            if memes_count == 0 {
-                println("memes = 0, need meme")
-                getMeme()
-            }
-        } else {
-            println("self.memes not set, reloading")
-            reloadTableData()
-            
-        }
     }
     
     func getMeme(){

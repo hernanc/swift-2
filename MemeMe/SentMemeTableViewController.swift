@@ -26,13 +26,12 @@ class SentMemeTableViewController : UIViewController, UITableViewDataSource, UIT
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let memes_count = memes?.count {
-            if memes_count == 0 {
-                println("memes = 0, need meme")
-                getMeme()
-            }
+        let firstLaunch = NSUserDefaults.standardUserDefaults().boolForKey("FirstLaunch")
+        if firstLaunch  {
+            println("Not first launch.")
         } else {
-            println("self.memes not set")
+            println("First launch, setting NSUserDefault.")
+            NSUserDefaults.standardUserDefaults().setBool(true, forKey: "FirstLaunch")
             getMeme()
         }
     }
