@@ -16,56 +16,45 @@ class SentMemeCollectionViewController : UIViewController, UICollectionViewDataS
     @IBOutlet weak var collectionView: UICollectionView!
     
     func viewWillAppear() {
-        self.reloadTableData()
+        reloadTableData()
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        self.reloadTableData()
+        reloadTableData()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        if let memes_count = self.memes?.count {
-            if memes_count == 0 {
-                println("memes = 0, need meme")
-                self.getMeme()
-            }
-        } else {
-            println("self.memes not set, reloading")
-            self.reloadTableData()
-            
-        }
     }
     
     func getMeme(){
-        var controller = self.storyboard?.instantiateViewControllerWithIdentifier("makeMemeViewController") as! UIViewController
+        var controller = storyboard?.instantiateViewControllerWithIdentifier("makeMemeViewController") as! UIViewController
         presentViewController(controller, animated: true, completion: nil)
     }
     
     func reloadTableData(){
         let applicationDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
-        self.memes = applicationDelegate.memes
-        println("Loaded \(self.memes.count) memes")
-        self.collectionView.reloadData()
+        memes = applicationDelegate.memes
+        println("Loaded \(memes.count) memes")
+        collectionView.reloadData()
     }
     
     // Delegates
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if let meme_count = self.memes?.count {
+        if let meme_count = memes?.count {
             return meme_count
-        }else{
-            self.reloadTableData()
+        } else {
+            reloadTableData()
             
         }
-        return self.memes.count
+        return memes.count
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("MemeCollectionCell", forIndexPath: indexPath) as! MemeCollectionViewCell
-        let meme = self.memes[indexPath.row]
+        let meme = memes[indexPath.row]
         
         cell.memeTopLabel.text = meme.topText
         cell.memeBottomLabel.text = meme.bottomText
@@ -76,9 +65,9 @@ class SentMemeCollectionViewController : UIViewController, UICollectionViewDataS
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath:NSIndexPath) {
-        let detailController = self.storyboard!.instantiateViewControllerWithIdentifier("MemeDetailViewController") as! MemeDetailViewController
-        detailController.meme = self.memes[indexPath.row]
-        self.navigationController!.pushViewController(detailController, animated: true)
+        let detailController = storyboard!.instantiateViewControllerWithIdentifier("MemeDetailViewController") as! MemeDetailViewController
+        detailController.meme = memes[indexPath.row]
+        navigationController!.pushViewController(detailController, animated: true)
     }
 
     
