@@ -98,10 +98,14 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     // UIImagePickerControllerDelegate imagePicker methods
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]){
+        print(info)
         if let image = info["UIImagePickerControllerOriginalImage"] as? UIImage {
+            
             topText.hidden = false
             bottomText.hidden = false
+            memeImageView.contentMode = UIViewContentMode.ScaleAspectFill
             memeImageView.image = image
+            
         }
         dismissViewControllerAnimated(true, completion: nil)
     }
