@@ -37,14 +37,6 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     }
     
     func setDefaultTextAttributes() {
-        // Original memeTextAttributes
-//        let memeTextAttributes = [
-//            NSForegroundColorAttributeName : UIColor.whiteColor(),
-//            NSFontAttributeName : UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
-//            NSStrokeWidthAttributeName : NSNumber(float: 5.0)
-//            NSStrokeColorAttributeName : UIColor.blackColor(),
-//        ]
-        // Alternative to make the fonts be white and not transparent, it's not perfect but the other it worse
         var shadow = NSShadow()
         shadow.shadowBlurRadius = 2
         shadow.shadowColor = UIColor.blackColor()
